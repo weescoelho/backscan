@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitar Localização</title>
+</head>
+<body>
+  <h1>Bem-vindo!</h1>
+  <button id="request-location">Compartilhar Localização</button>
+
+  <script>
+    document.getElementById("request-location").addEventListener("click", () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendLocation, handleError);
+      } else {
+        alert("Geolocalização não é suportada por este navegador.");
+      }
+    });
+
+    function sendLocation(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+   
+      console.log("Latitude: " + latitude);
+      // Envia a localização para o backend
+      fetch("https://0665-191-44-0-11.ngrok-free.app/send-location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ latitude, longitude })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Localização enviada com sucesso!");
+        } else {
+          alert("Erro ao enviar a localização.");
+        }
+      })
+      .catch(error => {
+        console.error("Erro:", error);
+      });
+    }
+
+    function handleError(error) {
+      alert("Erro ao obter a localização: " + error.message);
+    }
+  </script>
+</body>
+</html>
