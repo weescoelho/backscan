@@ -1,96 +1,111 @@
-BackScan
+# BackScan
 
 BackScan é um sistema desenvolvido para capturar a localização do usuário e enviá-la para um bot do Telegram por meio de um servidor Express.
 
-Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-HTML + JavaScript - Interface simples para captura da localização
+- **HTML + JavaScript** - Interface simples para captura da localização
+- **Express.js** - Backend para receber e processar os dados
+- **Axios** - Comunicação com a API do Telegram
+- **Ngrok** - Expor o servidor local para acesso externo
 
-Express.js - Backend para receber e processar os dados
+## Como Rodar o Projeto
 
-Axios - Comunicação com a API do Telegram
+### Requisitos
 
-Ngrok - Expor o servidor local para acesso externo
+- Node.js 16+
+- Ngrok (para expor o servidor)
+- Conta no Telegram e um bot configurado
 
-Como Rodar o Projeto
+### Passos
 
-Requisitos
+1. **Clone o repositório:**
 
-Node.js 16+
+   ```sh
+   git clone https://github.com/seu-usuario/backscan.git
+   cd backscan
+   ```
 
-Ngrok (para expor o servidor)
+2. **Instale as dependências:**
 
-Conta no Telegram e um bot configurado
+   ```sh
+   npm install
+   ```
 
-Passos
+3. **Configure as variáveis de ambiente:**
 
-Clone o repositório:
+   No arquivo `server.js`, substitua `BOT-TOKEN` pelo token do seu bot Telegram.
+   
+   Substitua `CHAT-TOKEN` pelo ID do chat ou grupo onde quer receber as mensagens.
 
-git clone https://github.com/seu-usuario/backscan.git
-cd backscan
+4. **Inicie o servidor:**
 
-Instale as dependências:
+   ```sh
+   node server.js
+   ```
 
-npm install
+5. **Exponha o servidor com Ngrok:**
 
-Configure as variáveis de ambiente:
+   ```sh
+   ngrok http 8088
+   ```
 
-No arquivo server.js, substitua BOT-TOKEN pelo token do seu bot Telegram.
+6. **Copie a URL gerada pelo Ngrok** (por exemplo, `https://abc123.ngrok.io`).
 
-Substitua CHAT-TOKEN pelo ID do chat ou grupo onde quer receber as mensagens.
+7. **Atualize a URL no arquivo `index.html`**:
 
-Inicie o servidor:
+   ```js
+   fetch("https://abc123.ngrok.io/send-location", {
+   ```
 
-node server.js
+8. **Salve as alterações no arquivo.**
 
-Exponha o servidor com Ngrok:
+9. **Abra o arquivo `index.html` em um navegador e permita o acesso à localização.**
 
-ngrok http 8088
+## Como Criar e Configurar um Bot no Telegram
 
-Copie a URL gerada pelo Ngrok (por exemplo, https://abc123.ngrok.io).
+1. No Telegram, procure pelo `@BotFather`.
+2. Envie o comando `/newbot` e siga as instruções para criar um novo bot.
+3. Anote o token fornecido pelo `BotFather`.
+4. Para obter o ID do chat/grupo:
+   - Adicione o bot a um grupo.
+   - Envie uma mensagem no grupo.
+   - Acesse:
+     ```
+     https://api.telegram.org/botSEU_BOT_TOKEN/getUpdates
+     ```
+   - Encontre o `chat_id`.
 
-Atualize a URL no arquivo index.html:
+## Estrutura de Pastas
 
-fetch("https://abc123.ngrok.io/send-location", {
-
-Salve as alterações no arquivo.
-
-Abra o arquivo index.html em um navegador e permita o acesso à localização.
-
-Como Criar e Configurar um Bot no Telegram
-
-No Telegram, procure pelo @BotFather.
-
-Envie o comando /newbot e siga as instruções para criar um novo bot.
-
-Anote o token fornecido pelo BotFather.
-
-Para obter o ID do chat/grupo:
-
-Adicione o bot a um grupo.
-
-Envie uma mensagem no grupo.
-
-Acesse https://api.telegram.org/botSEU_BOT_TOKEN/getUpdates e encontre o chat_id.
-
-Estrutura de Pastas
-
+```
 backscan/
-│-- index.html         # Página para capturar a localização
-│-- server.js          # Servidor Express para processar e enviar os dados
-│-- package.json       # Dependências do projeto
-│-- README.md          # Documentação do projeto
+│-- index.html   # Página para capturar a localização
+│-- server.js    # Servidor Express para processar e enviar os dados
+│-- package.json # Dependências do projeto
+│-- README.md    # Documentação do projeto
+```
 
-Contribuição
+## Contribuição
 
 Se você deseja contribuir com o BackScan:
 
-Fork este repositório
+1. **Fork este repositório**
+2. **Crie uma branch para sua feature:**
+   ```sh
+   git checkout -b minha-feature
+   ```
+3. **Faça commit das mudanças:**
+   ```sh
+   git commit -m 'Adiciona nova funcionalidade'
+   ```
+4. **Envie o push para a branch:**
+   ```sh
+   git push origin minha-feature
+   ```
+5. **Abra um Pull Request**
 
-Crie uma branch para sua feature (git checkout -b minha-feature)
+---
 
-Faça commit das mudanças (git commit -m 'Adiciona nova funcionalidade')
+Sinta-se à vontade para sugerir melhorias ou reportar problemas! 🚀
 
-Envie o push para a branch (git push origin minha-feature)
-
-Abra um Pull Request
