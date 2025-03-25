@@ -1,111 +1,167 @@
-# BackScan
+# Tutorial Completo: Configurando e Rodando o BackScan no Ubuntu do Zero
 
-BackScan é um sistema desenvolvido para capturar a localização do usuário e enviá-la para um bot do Telegram por meio de um servidor Express.
+Este tutorial irá guiar um iniciante absoluto para configurar um ambiente de desenvolvimento no Ubuntu e rodar o projeto **BackScan**.
 
-## Tecnologias Utilizadas
+(Quem tem windows pode baixa o ubuntu subsystem 22.04 na microsoft store)
 
-- **HTML + JavaScript** - Interface simples para captura da localização
-- **Express.js** - Backend para receber e processar os dados
-- **Axios** - Comunicação com a API do Telegram
-- **Ngrok** - Expor o servidor local para acesso externo
+---
 
-## Como Rodar o Projeto
+## 1. Atualizar o Sistema Operacional
+Antes de começar, é recomendado atualizar os pacotes do Ubuntu.
 
-### Requisitos
+```bash
+sudo apt update && sudo apt upgrade -y
+```
 
-- Node.js 16+
-- Ngrok (para expor o servidor)
-- Conta no Telegram e um bot configurado
+---
 
-### Passos
+## 2. Instalar o Node.js e o npm
+O projeto requer o **Node.js 16+**.
 
-1. **Clone o repositório:**
+### 2.1 Verificar se o Node.js já está instalado
+```bash
+node -v
+```
+Se aparecer um número de versão (ex: `v16.13.0`), pule para a próxima etapa.
 
-   ```sh
-   git clone https://github.com/seu-usuario/backscan.git
-   cd backscan
+### 2.2 Instalar o Node.js
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+### 2.3 Verificar a instalação
+```bash
+node -v  # Deve exibir a versão do Node.js
+npm -v   # Deve exibir a versão do npm
+```
+
+---
+
+## 3. Instalar o Git
+O Git é necessário para clonar o projeto.
+
+```bash
+sudo apt install -y git
+```
+Verifique a instalação:
+```bash
+git --version
+```
+
+---
+
+## 4. Clonar o Repositório BackScan
+
+```bash
+git clone https://github.com/seu-usuario/backscan.git
+cd backscan
+```
+
+---
+
+## 5. Instalar as Dependências do Projeto
+
+```bash
+npm install
+```
+
+---
+
+## 6. Configurar as Variáveis do Projeto
+Edite o arquivo `server.js`:
+
+```bash
+nano server.js
+```
+
+Substitua **BOT-TOKEN** pelo token do seu bot do Telegram.
+
+Substitua **CHAT-TOKEN** pelo ID do chat ou grupo onde deseja receber as mensagens.
+
+Pressione **CTRL + X**, depois **Y** e **Enter** para salvar.
+
+---
+
+## 7. Criar e Configurar um Bot no Telegram
+
+1. No Telegram, procure por **@BotFather**.
+2. Envie o comando:
    ```
-
-2. **Instale as dependências:**
-
-   ```sh
-   npm install
+   /newbot
    ```
-
-3. **Configure as variáveis de ambiente:**
-
-   No arquivo `server.js`, substitua `BOT-TOKEN` pelo token do seu bot Telegram.
-   
-   Substitua `CHAT-TOKEN` pelo ID do chat ou grupo onde quer receber as mensagens.
-
-4. **Inicie o servidor:**
-
-   ```sh
-   node server.js
-   ```
-
-5. **Exponha o servidor com Ngrok:**
-
-   ```sh
-   ngrok http 8088
-   ```
-
-6. **Copie a URL gerada pelo Ngrok** (por exemplo, `https://abc123.ngrok.io`).
-
-7. **Atualize a URL no arquivo `index.html`**:
-
-   ```js
-   fetch("https://abc123.ngrok.io/send-location", {
-   ```
-
-8. **Salve as alterações no arquivo.**
-
-9. **Abra o arquivo `index.html` em um navegador e permita o acesso à localização.**
-
-## Como Criar e Configurar um Bot no Telegram
-
-1. No Telegram, procure pelo `@BotFather`.
-2. Envie o comando `/newbot` e siga as instruções para criar um novo bot.
-3. Anote o token fornecido pelo `BotFather`.
-4. Para obter o ID do chat/grupo:
-   - Adicione o bot a um grupo.
+3. Siga as instruções e anote o **token** fornecido.
+4. Para obter o **ID do chat/grupo**:
+   - Adicione o bot ao grupo.
    - Envie uma mensagem no grupo.
    - Acesse:
      ```
      https://api.telegram.org/botSEU_BOT_TOKEN/getUpdates
      ```
-   - Encontre o `chat_id`.
-
-## Estrutura de Pastas
-
-```
-backscan/
-│-- index.html   # Página para capturar a localização
-│-- server.js    # Servidor Express para processar e enviar os dados
-│-- package.json # Dependências do projeto
-│-- README.md    # Documentação do projeto
-```
-
-## Contribuição
-
-Se você deseja contribuir com o BackScan:
-
-1. **Fork este repositório**
-2. **Crie uma branch para sua feature:**
-   ```sh
-   git checkout -b minha-feature
-   ```
-3. **Faça commit das mudanças:**
-   ```sh
-   git commit -m 'Adiciona nova funcionalidade'
-   ```
-4. **Envie o push para a branch:**
-   ```sh
-   git push origin minha-feature
-   ```
-5. **Abra um Pull Request**
+   - Anote o `chat_id`.
 
 ---
 
-Sinta-se à vontade para sugerir melhorias ou reportar problemas! 🚀
+## 8. Iniciar o Servidor
+
+```bash
+node server.js
+```
+
+Se tudo estiver correto, a saída deve indicar que o servidor está rodando.
+
+---
+
+## 9. Instalar e Configurar o Ngrok
+O **Ngrok** é usado para expor o servidor local para a internet.
+
+### 9.1 Baixar e Instalar o Ngrok
+```bash
+wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-stable-linux-amd64.zip
+unzip ngrok-stable-linux-amd64.zip
+chmod +x ngrok
+sudo mv ngrok /usr/local/bin/
+```
+
+### 9.2 Criar Conta no Ngrok
+Acesse [https://ngrok.com/](https://ngrok.com/) e crie uma conta.
+
+Após criar a conta, pegue seu **Authtoken** e rode:
+```bash
+ngrok authtoken SEU_AUTHTOKEN
+```
+
+---
+
+## 10. Expor o Servidor com o Ngrok
+
+```bash
+ngrok http 8088
+```
+
+Copie a **URL gerada pelo Ngrok** (exemplo: `https://abc123.ngrok.io`).
+
+---
+
+## 11. Atualizar a URL no Projeto
+Abra o arquivo `index.html`:
+```bash
+nano index.html
+```
+Substitua `https://abc123.ngrok.io` pela URL gerada pelo Ngrok:
+```js
+fetch("https://abc123.ngrok.io/send-location", {
+```
+Salve as alterações (**CTRL + X**, **Y**, **Enter**).
+
+---
+
+## 12. Testar o Projeto
+Abra o **index.html** no navegador e permita o acesso à localização. Se tudo estiver correto, a localização será enviada para o bot no Telegram.
+
+---
+
+## Conclusão
+Agora você tem o projeto BackScan rodando do zero no Ubuntu, mesmo sem experiência em programação. 🚀
 
