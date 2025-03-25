@@ -55,7 +55,7 @@ git --version
 ## 4. Clonar o Repositório BackScan
 
 ```bash
-git clone https://github.com/seu-usuario/backscan.git
+git clone https://github.com/PedroHBessa/backscan.git
 cd backscan
 ```
 
