@@ -1,8 +1,8 @@
-# Tutorial Completo: Configurando e Rodando o BackScan no Ubuntu do Zero
+# Tutorial Completo: Configurando e Rodando o BackScan no Ubuntu do Zero (ou windows)
 
 Este tutorial irá guiar um iniciante absoluto para configurar um ambiente de desenvolvimento no Ubuntu e rodar o projeto **BackScan**.
 
-(Quem tem windows pode baixa o ubuntu subsystem 22.04 na microsoft store)
+(Quem tem windows pode baixar o ubuntu subsystem 22.04 na microsoft store)
 
 ---
 
