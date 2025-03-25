@@ -1,8 +1,6 @@
-# Tutorial Completo: Configurando e Rodando o BackScan no Ubuntu do Zero (ou windows)
+# Tutorial Completo: Configurando e Rodando o BackScan no Ubuntu do Zero
 
 Este tutorial irá guiar um iniciante absoluto para configurar um ambiente de desenvolvimento no Ubuntu e rodar o projeto **BackScan**.
-
-(Quem tem windows pode baixar o ubuntu subsystem 22.04 na microsoft store)
 
 ---
 
@@ -159,6 +157,34 @@ Salve as alterações (**CTRL + X**, **Y**, **Enter**).
 
 ## 12. Testar o Projeto
 Abra o **index.html** no navegador e permita o acesso à localização. Se tudo estiver correto, a localização será enviada para o bot no Telegram.
+
+---
+
+## 13. Hospedar a Página HTML na Vercel
+
+Para deixar a interface do **BackScan** online, vamos hospedar o `index.html` na Vercel.
+
+### 13.1 Criar uma Conta na Vercel
+1. Acesse [https://vercel.com/](https://vercel.com/) e crie uma conta (pode usar o login do GitHub).
+2. Após logar, clique em **"New Project"**.
+
+### 13.2 Subir o Projeto para o GitHub
+Caso ainda não tenha subido o código:
+```bash
+git init
+git add index.html
+git commit -m "Adiciona interface do BackScan"
+git branch -M main
+git remote add origin https://github.com/seu-usuario/backscan-frontend.git
+git push -u origin main
+```
+
+### 13.3 Implantar na Vercel
+1. Na Vercel, clique em **"Import Git Repository"** e selecione o repositório do seu projeto.
+2. Escolha as configurações padrão e clique em **Deploy**.
+3. Após a implantação, copie a URL gerada (ex: `https://backscan.vercel.app`).
+
+Agora qualquer pessoa pode acessar sua página! 🚀
 
 ---
 
