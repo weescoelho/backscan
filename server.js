@@ -12,9 +12,9 @@ const TELEGRAM_BOT_TOKEN = "BOT-TOKEN"; // Substitua pelo token do seu bot
 const TELEGRAM_CHAT_ID = "CHAT-TOKEN"; // Substitua pelo ID do chat (ou grupo) para onde quer enviar
 
 app.post("/send-location", async (req, res) => {
-  const { latitude, longitude } = req.body;
+  const { latitude, longitude, maps } = req.body;
 
-  const message = `A localização do usuário é:\nLatitude: ${latitude}\nLongitude: ${longitude}`;
+  const message = `A localização do usuário é:\nLatitude: ${latitude}\nLongitude: ${longitude}\nMaps: ${maps}`;
 
   try {
     // Envia a localização para o Telegram
